@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação</title>    
+    <style>
+        body {
+            font: normal 18pt arial;
+            background-color: lightgray;
+        }
+        input {
+            font: normal 18pt arial;
+            width: 150px;
+            height: 20px;
+        }
+        input.dentro {
+            box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3),
+              inset -3px -3px 6px rgba(7, 0, 0, 0.192);
+        }
+      input.verificar {
+    background: #f1f1f1;
+    color: rgb(0, 0, 0);
+    border: none;
+    padding: 9px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+div#res {
+    margin-top: 20px;
+    
+}
+input.verificarclick:hover {
+    background: #95c497;
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3),
+              inset -3px -3px 6px rgba(7, 0, 0, 0.192);
+}
+input.verificarclick {
+    height: 40px;
+    border-radius: 10px;
+    background-color: lightgray;
+    box-shadow: inset 1px 2px 3px 5px rgba(0, 0, 0, 0.096);
+}
+    </style>
+
+</head>
+<body>
+    <H1>De onde você é?</H1>
+     Qual o seu país de nascimento? <input type="text" name="txtlocal" id="txtlocal" class="verificar">
+    <input type="button" value="Verificar" onclick="verificar()" class="verificarclick">
+    <div id="res">
+
+    </div>
+    <script>
+        document.getElementById('txtlocal').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter'){
+                verificar();    //permite que o usuario aperte enter para verificar.
+            } 
+        });
+        document.getElementById('txtlocal').addEventListener('keydown', e => {
+        if (!e.key.match(/^[a-zA-ZÀ-ÿ]$/) && e.key !== 'Backspace' && e.key !== 'Tab' && e.key !== 'Enter' && e.key !== ' ') {
+         e.preventDefault(); //impede que o usuario coloque numeros e caracteres inválidos.
+         }
+        });
+        
+        document.getElementById('txtlocal').addEventListener('paste', e => {
+        const textoColado = (e.clipboardData || window.clipboardData).getData('text');
+        if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(textoColado)) {
+            e.preventDefault(); // impede a colagem se houver caractere inválido
+        }
+        });
+
+        
+        function verificar(){
+            let txtl = document.getElementById('txtlocal')
+            let res = document.getElementById('res')
+            let local = String(txtl.value).trim().toLowerCase()
+            if (local.length < 3) { res.innerHTML = '<p>Inválido, o campo deve ser preenchido com ao menos 4 caracteres.</p>'; // pelo menos quatro caracteres para verificar
+            txtl.value = '';
+            txtl.focus();
+            return
+            }
+            res.innerHTML = '';
+            if (local !== 'brasil') {
+                res.innerHTML += `<p> Você é <strong>Estrangeiro</strong></p>`
+            } else {
+                res.innerHTML += `<p> Você é <strong>Brasileiro</strong></p>`
+            }
+            txtl.value = '';
+            txtl.focus();
+        }
+    </script>
+</body>
+</html>
