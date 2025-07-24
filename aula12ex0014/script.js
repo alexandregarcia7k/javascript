@@ -13,12 +13,12 @@ function carregar() {
     } else if (hora > 12 && hora <= 18){
         img.src = 'tarde.jpg'
         document.getElementById('msg')
-         msg.innerHTML = 'Boa Tarde!'
+         msg.innerHTML = `Boa Tarde! agora são ${hora} horas.`
          document.body.style.background = '#b9846f'
     }else {
         img.src = 'noite.jpg'
         document.getElementById('msg')
-         msg.innerHTML = 'Boa Noite!'
+         msg.innerHTML = `Boa Noite! agora são ${hora} horas.`
          document.body.style.background = '#515154'
     }
 }
