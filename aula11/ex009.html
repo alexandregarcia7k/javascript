@@ -76,7 +76,7 @@ input.verificarclick {
             let txtl = document.getElementById('txtlocal')
             let res = document.getElementById('res')
             let local = String(txtl.value).trim().toLowerCase()
-            if (local.length < 3) { res.innerHTML = '<p>Inválido, o campo deve ser preenchido com ao menos 4 caracteres.</p>'; // pelo menos quatro caracteres para verificar
+            if (local.length < 3) { res.innerHTML = '<p>Inválido, o campo deve ser preenchido com ao menos 3 caracteres.</p>'; // pelo menos quatro caracteres para verificar
             txtl.value = '';
             txtl.focus();
             return
